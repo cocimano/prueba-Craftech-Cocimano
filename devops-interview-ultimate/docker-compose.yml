@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # Backend service
+  api:
+    build:
+      context: ./backend  # El contexto apunta a la carpeta del backend
+      dockerfile: Dockerfile  # Dockerfile en el directorio del backend
+    volumes:
+      - ./backend:/usr/src/app/  # Monta la carpeta del backend en el contenedor
+      - static:/usr/src/app/static  # Directorio para archivos estáticos
+      - media:/usr/src/app/media  # Directorio para archivos de medios
+    ports:
+      - "8000:8000"  # Exponer el puerto 8000
+    env_file:
+      - ./backend/.env  # Archivo de entorno para configuraciones del backend
+    depends_on:
+      - db  # Depende del servicio de la base de datos
+  
+  # Database service
+  db:
+    container_name: database
+    image: postgres:12.0-alpine
+    env_file: ./backend/.env.postgres  # Archivo de entorno para configuraciones de la base de datos
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Volumen para persistencia de datos
+    ports:
+      - "5432:5432"  # Exponer el puerto 5432
+
+  # Frontend service
+  react:
+    container_name: react
+    build:
+      context: ./frontend  # El contexto apunta a la carpeta del frontend
+      dockerfile: Dockerfile  # Dockerfile en el directorio del frontend
+    ports:
+      - "3000:3000"  # Exponer el puerto 3000
+    environment:
+      - CHOKIDAR_USEPOLLING=true  # Configuración de entorno para React
+    depends_on:
+      - api  # El frontend depende del backend para estar disponible
+
+volumes:
+  postgres_data:
+  static:
+  media:
