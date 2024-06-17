@@ -1,10 +1,10 @@
 #!/bin/sh
-
 if [ "$DATABASE" = "postgres" ]
 then
     echo "Waiting for postgres..."
 
-    while ! nc -z $SQL_HOST $SQL_PORT; do
+    while ! nc -z $SQL_HOST $SQL_PORT;
+    do
       sleep 0.1
     done
 
@@ -23,7 +23,5 @@ python manage.py migrate
 python manage.py loaddata initial_data.json
 # python manage.py collectstatic --noinput
 python manage.py runserver 0.0.0.0:8000
-
-
 
 exec "$@"

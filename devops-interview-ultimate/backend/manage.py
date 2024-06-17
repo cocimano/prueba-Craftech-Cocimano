@@ -7,9 +7,9 @@ import sys
 
 def main():
     """Run env file check"""
-    if not "SQL_DATABASE" in os.environ:
+    if not "DATABASE_NAME" in os.environ:
         raise Exception(
-            "Please create a proper .env file based on 'env.example' template"
+            "Please create a proper .env file based on 'env.example' template" #~ There is no env.example file in the project
         )
     """Run administrative tasks."""
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
