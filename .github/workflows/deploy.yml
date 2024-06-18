@@ -40,28 +40,6 @@ jobs:
       
       - name: Deploy to Docker Compose
         run: |
+          cd ../3-ci_cd/
           docker-compose down
           docker-compose up -d
-
-
-
-
-# docker-compose:
-#   needs: build-and-deploy
-#   runs-on: ubuntu-latest
-#   name: Docker Compose
-#   steps:
-#     - run: docker-compose down
-#     - run: docker-compose up -d
-
-
-
-        # run: |
-        #     docker build -t my-nginx:latest ./3-ci_cd/nginx
-        #     docker tag my-nginx:latest ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
-        #     docker push ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
-
-      # - name: Deploy to Docker Compose
-      #   run: |
-      #     docker-compose down
-      #     docker-compose up -d

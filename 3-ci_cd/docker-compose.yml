@@ -1,4 +1,4 @@
-version: '2.27'  # Actualiza la versión para evitar el mensaje de obsolescencia
+version: '2.27' 
 
 services:
   web:
