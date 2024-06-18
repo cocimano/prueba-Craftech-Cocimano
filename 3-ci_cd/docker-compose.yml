@@ -1,0 +1,10 @@
+version: '2.27'  # Actualiza la versión para evitar el mensaje de obsolescencia
+
+services:
+  web:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+
