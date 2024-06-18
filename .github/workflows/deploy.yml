@@ -4,9 +4,14 @@ on:
   push:
     branches:
       - master
+    paths:
+      - '3-ci_cd/nginx/index.html'
   pull_request:
     branches:
       - master
+    paths:
+      - '3-ci_cd/nginx/index.html'
+  
 
 jobs:
   build-and-deploy:
@@ -14,24 +19,49 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 #~ Check out your repository so your workflow can access it
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v2 #~ Set up Docker Buildx to build multi-platform images
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v2 #~ Log in to Docker Hub so you can push images to it
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }}
+          password: ${{ secrets.DOCKER_TOKEN }} 
 
       - name: Build and push Docker image
-        run: |
-            docker build -t my-nginx:latest ./3-ci_cd/nginx
-            docker tag my-nginx:latest ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
-            docker push ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
-
+        uses: docker/build-push-action@v2 #~ Build and push Docker images to a container registry
+        with:
+          context: ./3-ci_cd/nginx
+          file: ./3-ci_cd/nginx/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
+      
       - name: Deploy to Docker Compose
         run: |
           docker-compose down
           docker-compose up -d
+
+
+
+
+# docker-compose:
+#   needs: build-and-deploy
+#   runs-on: ubuntu-latest
+#   name: Docker Compose
+#   steps:
+#     - run: docker-compose down
+#     - run: docker-compose up -d
+
+
+
+        # run: |
+        #     docker build -t my-nginx:latest ./3-ci_cd/nginx
+        #     docker tag my-nginx:latest ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
+        #     docker push ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
+
+      # - name: Deploy to Docker Compose
+      #   run: |
+      #     docker-compose down
+      #     docker-compose up -d
