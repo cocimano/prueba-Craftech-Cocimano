@@ -27,7 +27,7 @@ jobs:
 
       - name: Build and push Docker image
         run: |
-          docker build -t my-nginx:latest ./nginx
+          docker build -t my-nginx:latest ./3-ci_cd/nginx
           docker tag my-nginx:latest ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/my-nginx:latest
 
