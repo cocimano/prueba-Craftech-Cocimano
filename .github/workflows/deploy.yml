@@ -40,6 +40,6 @@ jobs:
       
       - name: Deploy to Docker Compose
         run: |
-          cd ../../3-ci_cd/
+          cd ./3-ci_cd/
           docker-compose down
           docker-compose up -d
