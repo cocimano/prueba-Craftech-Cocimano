@@ -15,9 +15,9 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 1. **Clonar el Repositorio**
 
-   Primero, clona el repositorio a tu máquina local.
-   `git clone <url_repositorio>`
-   `cd <nombre_repositorio>`
+   Primero, clona el repositorio a tu máquina local.  
+   `git clone <url_repositorio>`  
+   `cd <nombre_repositorio>`  
 
 
 2. **Construir y Ejecutar con Docker Compose**
