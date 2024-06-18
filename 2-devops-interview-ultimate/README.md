@@ -5,7 +5,7 @@
 Este proyecto combina un backend en Django con un frontend en React.js, desplegados y orquestados mediante Docker Compose.
 
 ## Requisitos
-Antes de comenzar, asegúrate de tener instalado lo siguiente:
+Antes de comenzar, asegúrate de tener instalado:
 
 - Docker y Docker Compose
 - Cuenta de AWS con los permisos necesarios
@@ -22,8 +22,8 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 
 2. **Construir y Ejecutar con Docker Compose**
 
-Dentro del directorio del proyecto, ejecuta el siguiente comando para construir y levantar los contenedores:
-    >>> docker-compose up --build
+Dentro del directorio del proyecto, ejecuta el siguiente comando para construir y levantar los contenedores:  
+    `docker-compose up --build`  
 
 Construirá las imágenes necesarias y levantará los contenedores para el backend, la base de datos y el frontend.
 
@@ -45,9 +45,9 @@ Para desplegar en AWS, utilizaremos Amazon ECS (Elastic Container Service) y Ama
 
 2. **Crear un Repositorio en Amazon ECR**
 
-Para cada imagen (backend, frontend), necesitarás un repositorio en Amazon ECR.
-    >>> aws ecr create-repository --repository-name <nombre-repositorio-backend>
-    >>> aws ecr create-repository --repository-name <nombre-repositorio-frontend>
+Para cada imagen (backend, frontend), necesitarás un repositorio en Amazon ECR.  
+    `aws ecr create-repository --repository-name <nombre-repositorio-backend>`
+    `aws ecr create-repository --repository-name <nombre-repositorio-frontend>`
 
 3. **Subir las Imágenes a ECR**
 
