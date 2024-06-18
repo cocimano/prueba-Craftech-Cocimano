@@ -8,4 +8,4 @@ COPY default.conf /etc/nginx/conf.d/default.conf
 COPY index.html /usr/share/nginx/html/index.html
 
 #~ Copia la imágen logo.png al directorio de imágenes de Nginx
-COPY logo.png /usr/share/nginx/html/images/logo.png
+COPY ./images/logo.png /usr/share/nginx/html/images/logo.png
