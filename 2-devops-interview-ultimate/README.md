@@ -45,19 +45,19 @@ Para desplegar en AWS, utilizaremos Amazon ECS (Elastic Container Service) y Ama
 
 2. **Crear un Repositorio en Amazon ECR**
 
-Para cada imagen (backend, frontend), necesitarás un repositorio en Amazon ECR.  
-    `aws ecr create-repository --repository-name <nombre-repositorio-backend>`
-    `aws ecr create-repository --repository-name <nombre-repositorio-frontend>`
+Para cada imagen (backend, frontend), necesitarás un repositorio en Amazon ECR.    
+    `aws ecr create-repository --repository-name <nombre-repositorio-backend>`  
+    `aws ecr create-repository --repository-name <nombre-repositorio-frontend>`  
 
 3. **Subir las Imágenes a ECR**
 
    Construye las imágenes Docker y súbelas a los repositorios ECR creados.
 
-   >>> $(aws ecr get-login --no-include-email --region <tu-region>)
-   >>> docker tag <imagen-backend>:latest <url-repositorio-ecr-backend>:latest
-   >>> docker push <url-repositorio-ecr-backend>:latest
-   >>> docker tag <imagen-frontend>:latest <url-repositorio-ecr-frontend>:latest
-   >>> docker push <url-repositorio-ecr-frontend>:latest
+   `$(aws ecr get-login --no-include-email --region <tu-region>)`  
+   `docker tag <imagen-backend>:latest <url-repositorio-ecr-backend>:latest`  
+   `docker push <url-repositorio-ecr-backend>:latest`  
+   `docker tag <imagen-frontend>:latest <url-repositorio-ecr-frontend>:latest`  
+   `docker push <url-repositorio-ecr-frontend>:latest`  
 
 4. **Crear un Cluster en ECS**
 
