@@ -1,3 +1,0 @@
-Recordá ser detallista, nos gusta ver la evaluación no solo desde el punto de vista técnico, 
-sino desde el punto de vista de cómo organizas el trabajo y las herramientas que usas. 
-La prueba se debe entrar en su totalidad en 1 solo repositorio que contenga la respuestas de los 3 puntos.

@@ -5,12 +5,12 @@ on:
     branches:
       - master
     paths:
-      - '3-ci_cd/nginx/index.html'
+      - '3-ci_cd/nginx/index.html' #~ Solo se ejecutará si se modifica el archivo index.html
   pull_request:
     branches:
       - master
     paths:
-      - '3-ci_cd/nginx/index.html'
+      - '3-ci_cd/nginx/index.html' #~ Solo se ejecutará si se modifica el archivo index.html
   
 
 jobs:
@@ -19,19 +19,19 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2 #~ Check out your repository so your workflow can access it
+        uses: actions/checkout@v2 #~ Realiza un checkout del repositorio (clona el repositorio en la máquina virtual)
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2 #~ Set up Docker Buildx to build multi-platform images
+        uses: docker/setup-buildx-action@v2 #~ Setea Docker Buildx para construir imágenes multiplataforma
 
       - name: Login to Docker Hub
-        uses: docker/login-action@v2 #~ Log in to Docker Hub so you can push images to it
+        uses: docker/login-action@v2 #~ Se loguea en Docker Hub para poder subir la imagen
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_TOKEN }} 
+          password: ${{ secrets.DOCKER_TOKEN }} #~ Se crea un token en Docker Hub y se guarda en los secrets del repositorio
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v2 #~ Build and push Docker images to a container registry
+        uses: docker/build-push-action@v2 #~ Construye y sube la imagen a Docker Hub
         with:
           context: ./3-ci_cd/nginx
           file: ./3-ci_cd/nginx/Dockerfile
@@ -42,4 +42,4 @@ jobs:
         run: |
           cd ./3-ci_cd/
           docker-compose down
-          docker-compose up -d
+          docker-compose up -d 
